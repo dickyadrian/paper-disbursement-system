@@ -25,6 +25,7 @@ func RunServer(ctx context.Context, app *application.App) {
 
 	v1.POST("/users", h.CreateUser)
 	v1.GET("/users/:id", h.GetUser)
+	v1.POST("/disbursements", h.CreateDisbursement)
 
 	done := make(chan bool)
 	go func() {

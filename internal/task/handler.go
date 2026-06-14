@@ -23,7 +23,5 @@ func (h *Handler) ProcessDisbursement(ctx context.Context, t *asynq.Task) error 
 		return fmt.Errorf("unmarshal payload: %w", err)
 	}
 
-	// TODO: load disbursement, call payment processor, update status
-
-	return nil
+	return h.App.DisbursementRepository.Process(ctx, payload.DisbursementID)
 }

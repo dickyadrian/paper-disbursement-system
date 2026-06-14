@@ -16,8 +16,9 @@ type App struct {
 
 	AppConfig config.App
 
-	DB             *pgxpool.Pool
-	UserRepository *repository.UserRepository
+	DB                     *pgxpool.Pool
+	UserRepository         *repository.UserRepository
+	DisbursementRepository *repository.DisbursementRepository
 }
 
 func NewApp(ctx context.Context) (*App, error) {
@@ -42,10 +43,11 @@ func NewApp(ctx context.Context) (*App, error) {
 	}
 
 	return &App{
-		AsynqClient:    asynq.NewClient(asynqRedisOpt),
-		AsynqRedisOpt:  asynqRedisOpt,
-		AppConfig:      appConfig,
-		DB:             db,
-		UserRepository: repository.NewUserRepository(db),
+		AsynqClient:            asynq.NewClient(asynqRedisOpt),
+		AsynqRedisOpt:          asynqRedisOpt,
+		AppConfig:              appConfig,
+		DB:                     db,
+		UserRepository:         repository.NewUserRepository(db),
+		DisbursementRepository: repository.NewDisbursementRepository(db),
 	}, nil
 }
